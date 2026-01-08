@@ -40,4 +40,4 @@ export const GROUPS: GroupMeta[] = [
  * 2. 홈 화면 백그라운드 이미지 (첫 구름 화면)
  * 가장 처음에 보이는 배경 화면 이미지를 여기서 수정합니다.
  */
-export const HOME_IMAGE = './home.jpg';
+export const HOME_IMAGE = '/home.jpg';
