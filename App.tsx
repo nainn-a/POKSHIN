@@ -124,7 +124,7 @@ const CategorySelectionPage: React.FC = () => {
             </h1>
           </header>
 
-          <div className="grid grid-cols-2 gap-4 md:gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-6xl mx-auto">
             {GROUPS.map((group) => {
               return (
                 <div 
@@ -211,7 +211,7 @@ const PostListPage: React.FC = () => {
           onBack={() => navigate('/select')}
         />
         
-        <div className="max-w-2xl mx-auto p-6 space-y-4">
+        <div className="mx-auto w-full max-w-2xl md:max-w-5xl lg:max-w-6xl p-6 space-y-4">
           {filteredPosts.length === 0 ? (
             <div className="py-32 text-center space-y-6">
               <div className="w-20 h-20 bg-neutral-200/50 rounded-full mx-auto flex items-center justify-center text-neutral-400">
@@ -376,18 +376,28 @@ const WritePage: React.FC = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-white">
-        <Header 
-          title="Archive Entry" 
-          showBack 
-          action={
-            <button 
-              onClick={handleSave} 
-              className="bg-black text-white px-8 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-all shadow-xl whitespace-nowrap"
-            >
-              SAVE
-            </button>
-          }
-        />
+        <Header
+  title="Archive Entry"
+  showBack
+  action={
+    <div className="flex items-center gap-2">
+      <button
+        onClick={handleSaveDraft}
+        className="bg-neutral-100 text-neutral-800 px-4 py-2.5 rounded-full font-bold text-xs active:scale-95 transition-all shadow whitespace-nowrap hover:bg-neutral-200"
+      >
+        DRAFT
+      </button>
+
+      <button
+        onClick={handleSave}
+        className="bg-black text-white px-6 py-2.5 rounded-full font-bold text-xs active:scale-95 transition-all shadow-xl whitespace-nowrap hover:bg-neutral-800"
+      >
+        SAVE
+      </button>
+    </div>
+  }
+/>
+
         
         <div className="w-full max-w-7xl mx-auto px-6 md:px-12">
           <div className="space-y-10 pb-48">
@@ -539,14 +549,6 @@ const WritePage: React.FC = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-.778.099-1.533.284-2.253" /></svg>
               </button>
             </div>
-            <div className="p-5 bg-white">
-              <div className="max-w-2xl mx-auto flex gap-4">
-                <button onClick={handleSaveDraft} className="flex-1 flex items-center justify-center gap-3 py-4 bg-neutral-100 text-neutral-800 rounded-[1.25rem] text-sm font-bold hover:bg-neutral-200 active:scale-[0.98] transition-all">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                  DRAFT SAVE
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -579,7 +581,7 @@ const ViewPostPage: React.FC = () => {
             </button>
           } 
         />
-        <article className="max-w-2xl mx-auto p-6 pt-16 pb-32">
+        <article className="mx-auto w-full max-w-2xl md:max-w-5xl lg:max-w-6xl p-6 pt-16 pb-32">
           {post.isAdult && <div className="inline-block bg-red-500 text-white text-[10px] px-4 py-1.5 font-black rounded-lg uppercase mb-6 shadow-xl">ADULT</div>}
           <h1 className="text-5xl md:text-6xl font-black mb-10 tracking-tighter leading-[1.1]">{post.title}</h1>
           <div className="flex flex-wrap gap-6 mb-12 text-neutral-400 text-[10px] font-black uppercase tracking-[0.2em] border-y border-neutral-100 py-6">
