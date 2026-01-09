@@ -317,21 +317,100 @@ const WritePage: React.FC = () => {
       }
     }
   }, [groupId]);
+  const compressImageToDataUrl = (file: File, maxW = 1200, quality = 0.82) =>
+  new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        URL.revokeObjectURL(url);
+        reject(new Error('Canvas not supported'));
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+      URL.revokeObjectURL(url);
+      resolve(dataUrl);
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('Image load failed'));
+    };
+
+    img.src = url;
+  });
+
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  try {
+    if (file.size > 8 * 1024 * 1024) {
+      alert('이미지가 너무 큽니다. 8MB 이하로 업로드해주세요.');
+      return;
+    }
+
+    const dataUrl = await compressImageToDataUrl(file, 1200, 0.82);
+    updateField('imageUrl', dataUrl);
+  } catch {
+    alert('이미지 처리에 실패했습니다.');
+  }
+};
+
 
   const updateField = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updateField('imageUrl', reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+const compressImageToDataUrl = (file: File, maxW = 1200, quality = 0.82) =>
+  new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        URL.revokeObjectURL(url);
+        reject(new Error('Canvas not supported'));
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+      URL.revokeObjectURL(url);
+      resolve(dataUrl);
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('Image load failed'));
+    };
+
+    img.src = url;
+  });
+
 
   const toggleGenre = (g: string) => {
     setFormData(prev => {
