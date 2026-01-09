@@ -389,7 +389,7 @@ const WritePage: React.FC = () => {
           }
         />
         
-        <div className="max-w-2xl mx-auto p-6 flex flex-col min-h-screen">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12">
           <div className="space-y-10 pb-48">
             <div className="relative">
               {formData.imageUrl ? (
