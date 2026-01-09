@@ -10,28 +10,28 @@ export const GROUPS: GroupMeta[] = [
     id: KPopGroup.ONEUS,
     // 원하는 이미지 주소로 교체하세요
     image: '/5.png',
-    color: 'from-blue-600 to-indigo-900',
+    color: 'from-neutral-900 to-neutral-900',
     description: 'Archive for TOMOON'
   },
   {
     id: KPopGroup.ONF,
     // 원하는 이미지 주소로 교체하세요
     image: '/6.png',
-    color: 'from-sky-100 to-blue-50',
+    color: 'from-neutral-900 to-neutral-900',
     description: 'Archive for FUSE'
   },
   {
     id: KPopGroup.VERIVERY,
     // 원하는 이미지 주소로 교체하세요
     image: '/7.png',
-    color: 'from-slate-800 to-slate-950',
+    color: 'from-neutral-900 to-neutral-900',
     description: 'Archive for VERRER'
   },
   {
     id: KPopGroup.P1HARMONY,
     // 원하는 이미지 주소로 교체하세요
     image: '/6.png',
-    color: 'from-cyan-50 to-white',
+    color: 'from-neutral-900 to-neutral-900',
     description: 'Archive for P1ece'
   }
 ];
